@@ -2,14 +2,14 @@
  * @Author: PaulDing 1031071856@qq.com
  * @Date: 2026-03-18 23:11:39
  * @LastEditors: PaulDing 1031071856@qq.com
- * @LastEditTime: 2026-03-23 13:51:14
+ * @LastEditTime: 2026-03-23 17:03:14
  * @FilePath: /tuina_of_brain/frontend/src/components/Header.tsx
  * @Description:
  *
  * Copyright (c) 2026 by ${git_name_email}, All Rights Reserved.
  */
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 interface HeaderProps {
 	title?: string;
 	showBack?: boolean;
@@ -58,6 +58,14 @@ export function Header({ title, showBack = false, onBack }: HeaderProps) {
 					className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
 					<span className="material-symbols-outlined text-xl">
 						{isDark ? "light_mode" : "dark_mode"}
+					</span>
+				</button>
+				<button className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+					<span
+						onClick={() => useNavigate()("/setting")}
+						className="material-symbols-outlined text-xl"
+						data-icon="settings">
+						settings
 					</span>
 				</button>
 			</div>

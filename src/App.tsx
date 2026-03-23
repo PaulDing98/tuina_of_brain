@@ -13,6 +13,7 @@ import { Home } from "./pages/Home";
 import { Layout } from "./components/Layout";
 import { Schulte } from "./pages/Schulte";
 import { Sequence } from "./pages/Sequence";
+import { Settings } from "./pages/Setting";
 // import { Result } from './pages/Result';
 
 function App() {
@@ -32,6 +33,10 @@ function App() {
 					<Route
 						path="/sequence"
 						element={<Sequence />}
+					/>
+					<Route
+						path="/setting"
+						element={<Settings />}
 					/>
 				</Route>
 			</Routes>
