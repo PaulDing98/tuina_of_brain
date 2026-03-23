@@ -2,7 +2,7 @@
  * @Author: PaulDing 1031071856@qq.com
  * @Date: 2026-03-22 13:22:37
  * @LastEditors: PaulDing 1031071856@qq.com
- * @LastEditTime: 2026-03-22 14:32:46
+ * @LastEditTime: 2026-03-23 17:10:29
  * @FilePath: /tuina_of_brain/frontend/src/router/index.tsx
  * @Description:
  *
@@ -23,6 +23,7 @@ import { Layout } from "../components/Layout";
 import { Home } from "../pages/Home";
 import { Schulte } from "../pages/Schulte";
 import { Sequence } from "../pages/Sequence";
+import { Settings } from "../pages/Setting";
 export interface RouteMeta {
 	title: string;
 	showBack?: boolean;
@@ -55,6 +56,14 @@ export const routes = [
 				element: <Sequence />,
 				handle: {
 					title: "序列记忆训练",
+					showBack: true,
+				} satisfies RouteMeta,
+			},
+			{
+				path: "settings",
+				element: <Settings />,
+				handle: {
+					title: "设置",
 					showBack: true,
 				} satisfies RouteMeta,
 			},

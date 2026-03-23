@@ -5,6 +5,7 @@
   --color-primary: #ec5b13;
   --color-background-light: #f8f6f6;
   --color-background-dark: #221610;
+  --color-tertiary-container: #1a365d;
   --font-family-display: 'Noto Sans SC', sans-serif;
 }
 
@@ -13,7 +14,7 @@
   font-family: 'Material Symbols Outlined';
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;
+  /* font-size: 24px; */
   line-height: 1;
   letter-spacing: normal;
   text-transform: none;
@@ -23,7 +24,17 @@
   direction: ltr;
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
 }
+
+/* 大号图标 - 覆盖默认 24px */
+/* .material-symbols-outlined .text-8xl {
+  font-size: 96px !important;
+} */
 
 /* 全局样式 */
 body {

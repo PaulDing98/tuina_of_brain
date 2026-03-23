@@ -2,7 +2,7 @@
  * @Author: PaulDing 1031071856@qq.com
  * @Date: 2026-03-18 23:11:39
  * @LastEditors: PaulDing 1031071856@qq.com
- * @LastEditTime: 2026-03-23 17:03:14
+ * @LastEditTime: 2026-03-23 17:09:15
  * @FilePath: /tuina_of_brain/frontend/src/components/Header.tsx
  * @Description:
  *
@@ -24,6 +24,7 @@ export function Header({ title, showBack = false, onBack }: HeaderProps) {
 		document.documentElement.classList.toggle("dark");
 	};
 
+	const navigate = useNavigate();
 	return (
 		// flex items-center justify-between border-b border-primary/10 bg-background-light dark:bg-background-dark px-6 py-4 lg:px-40
 		<header className="flex items-center justify-between border-b border-primary/10 bg-background-light dark:bg-background-dark px-6 py-4 lg:px-40">
@@ -62,7 +63,7 @@ export function Header({ title, showBack = false, onBack }: HeaderProps) {
 				</button>
 				<button className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
 					<span
-						onClick={() => useNavigate()("/setting")}
+						onClick={() => navigate("/settings")}
 						className="material-symbols-outlined text-xl"
 						data-icon="settings">
 						settings

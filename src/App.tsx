@@ -2,7 +2,7 @@
  * @Author: PaulDing 1031071856@qq.com
  * @Date: 2026-03-18 23:14:36
  * @LastEditors: PaulDing 1031071856@qq.com
- * @LastEditTime: 2026-03-20 21:01:07
+ * @LastEditTime: 2026-03-23 17:09:00
  * @FilePath: /tuina_of_brain/frontend/src/App.tsx
  * @Description:
  *
@@ -35,7 +35,7 @@ function App() {
 						element={<Sequence />}
 					/>
 					<Route
-						path="/setting"
+						path="/settings"
 						element={<Settings />}
 					/>
 				</Route>

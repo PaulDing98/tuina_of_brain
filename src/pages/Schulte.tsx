@@ -2,7 +2,7 @@
  * @Author: PaulDing 1031071856@qq.com
  * @Date: 2026-03-18 23:13:45
  * @LastEditors: PaulDing 1031071856@qq.com
- * @LastEditTime: 2026-03-23 13:56:35
+ * @LastEditTime: 2026-03-23 17:07:56
  * @FilePath: /tuina_of_brain/frontend/src/pages/Schulte.tsx
  * @Description:
  *
@@ -35,55 +35,6 @@ export function Schulte() {
 		const secs = (seconds % 60).toString().padStart(2, "0");
 		return `${mins}:${secs}`;
 	};
-
-	// <div className="p-4">
-	// 	{/* 状态栏 */}
-	// 	<div className="flex gap-4 mb-4 text-lg">
-	// 		<div>⏱️ {formatTime(displayTime)}</div>
-	// 		<div>🎯 目标: {currentTarget}</div>
-	// 		<div>❌ 错误: {wrongClicks}</div>
-	// 	</div>
-
-	// 	{/* 游戏控制 */}
-	// 	{gameState.status === "idle" && (
-	// 		<button
-	// 			onClick={startGame} // ✅ 调用开始游戏
-	// 			className="px-4 py-2 bg-blue-500 text-white rounded">
-	// 			开始游戏
-	// 		</button>
-	// 	)}
-
-	// 	{gameState.status === "completed" && (
-	// 		<div className="mb-4">
-	// 			<p className="text-green-600 text-xl">
-	// 				🎉 完成！用时 {formatTime(displayTime)}
-	// 			</p>
-	// 			<button
-	// 				onClick={reset} // ✅ 调用重置
-	// 				className="px-4 py-2 bg-gray-500 text-white rounded mt-2">
-	// 				再来一局
-	// 			</button>
-	// 		</div>
-	// 	)}
-
-	// 	{/* 5x5 网格 */}
-	// 	<div className="grid grid-cols-5 gap-2 max-w-md">
-	// 		{numbers.map((num) => (
-	// 			<button
-	// 				key={num}
-	// 				onClick={() => clickNumber(num)} // ✅ 调用点击数字
-	// 				disabled={gameState.status !== "playing"}
-	// 				className={`
-	//           w-14 h-14 rounded-lg font-bold text-xl
-	//           ${num < currentTarget ? "bg-green-300" : "bg-white border-2"}
-	//           ${gameState.status === "playing" ? "hover:bg-blue-100 cursor-pointer" : "opacity-50"}
-	//         `}>
-	// 				{num}
-	// 			</button>
-	// 		))}
-	// 	</div>
-	// </div>;
-
 	return (
 		<div className="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
 			<main className="flex flex-1 justify-center py-8 px-4 lg:px-40">
