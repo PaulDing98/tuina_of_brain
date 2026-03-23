@@ -2,7 +2,7 @@
  * @Author: PaulDing 1031071856@qq.com
  * @Date: 2026-03-18 23:11:39
  * @LastEditors: PaulDing 1031071856@qq.com
- * @LastEditTime: 2026-03-20 22:08:32
+ * @LastEditTime: 2026-03-23 13:51:14
  * @FilePath: /tuina_of_brain/frontend/src/components/Header.tsx
  * @Description:
  *
@@ -25,7 +25,9 @@ export function Header({ title, showBack = false, onBack }: HeaderProps) {
 	};
 
 	return (
-		<header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/10 px-6 py-4 lg:px-40 bg-white dark:bg-background-dark/50 sticky top-0 z-50">
+		// flex items-center justify-between border-b border-primary/10 bg-background-light dark:bg-background-dark px-6 py-4 lg:px-40
+		<header className="flex items-center justify-between border-b border-primary/10 bg-background-light dark:bg-background-dark px-6 py-4 lg:px-40">
+			{/* <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/10 px-6 py-4 lg:px-40 bg-background-light dark:bg-background-dark bg-white dark:bg-background-dark/50 sticky top-0 z-50"> */}
 			<div className="flex items-center gap-3">
 				<div className="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
 					<span className="material-symbols-outlined text-2xl">
