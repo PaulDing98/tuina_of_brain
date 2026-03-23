@@ -2,7 +2,7 @@
  * @Author: PaulDing 1031071856@qq.com
  * @Date: 2026-03-18 23:13:45
  * @LastEditors: PaulDing 1031071856@qq.com
- * @LastEditTime: 2026-03-22 20:29:32
+ * @LastEditTime: 2026-03-23 13:56:35
  * @FilePath: /tuina_of_brain/frontend/src/pages/Schulte.tsx
  * @Description:
  *
@@ -99,7 +99,7 @@ export function Schulte() {
 						<StatsCard
 							icon="checklist"
 							label="当前进度"
-							value={currentTarget + "/ 25"}
+							value={currentTarget - 1 + "/ 25"}
 						/>
 						<div className="flex py-2">
 							<button className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-14 px-5 flex-1 bg-primary text-white text-lg font-bold leading-normal tracking-wide shadow-lg shadow-primary/30 active:scale-[0.98] transition-all">
