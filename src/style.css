@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+/* Tailwind CSS v4 主题配置 */
+@theme {
+  --color-primary: #ec5b13;
+  --color-background-light: #f8f6f6;
+  --color-background-dark: #221610;
+  --font-family-display: 'Noto Sans SC', sans-serif;
+}
+
+/* Material Symbols 字体 */
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 全局样式 */
+body {
+  font-family: 'Noto Sans SC', sans-serif;
+}
+
+/* 自定义工具类 */
+@utility layout-content-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
