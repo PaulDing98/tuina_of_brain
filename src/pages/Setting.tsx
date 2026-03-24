@@ -2,7 +2,7 @@
  * @Author: PaulDing 1031071856@qq.com
  * @Date: 2026-03-22 20:23:03
  * @LastEditors: PaulDing 1031071856@qq.com
- * @LastEditTime: 2026-03-23 18:24:10
+ * @LastEditTime: 2026-03-24 18:58:28
  * @FilePath: /tuina_of_brain/frontend/src/pages/Setting.tsx
  * @Description:
  *
@@ -11,8 +11,18 @@
 
 // TODO: 实现训练完成页面
 // 参考 stitch 文件夹中的 code.html
-
+import { useNavigate } from "react-router-dom";
+import { useSettingStore } from "../store/useSettingStore";
+import {
+	FONT_COLOR_OPTIONS,
+	BORDER_COLOR_OPTIONS,
+	PENALTY_TIME_MIN,
+	PENALTY_TIME_MAX,
+	PENALTY_TIME_STEP,
+} from "../constants/Settings";
 export function Settings() {
+	const navigate = useNavigate();
+	const { schulte, sequence, updateSchulte, updateSequence } = useSettingStore();
 	return (
 		<div className="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
 			<main className="max-w-4xl mx-auto px-6 py-8">
@@ -52,7 +62,18 @@ export function Settings() {
 							</div>
 							<label className="relative inline-flex items-center cursor-pointer">
 								<input
-									checked={false}
+									checked={schulte.highlightOnCorrect}
+									value={
+										schulte.highlightOnCorrect
+											? "true"
+											: "false"
+									}
+									onChange={() =>
+										updateSchulte({
+											highlightOnCorrect:
+												!schulte.highlightOnCorrect,
+										})
+									}
 									className="sr-only peer"
 									type="checkbox"
 								/>
@@ -65,20 +86,26 @@ export function Settings() {
 									惩罚时间
 								</p>
 								<span className="bg-orange-50 text-primary px-3 py-1 rounded-lg text-sm font-bold">
-									2.5s
+									{schulte.penaltyTime / 1000}s
 								</span>
 							</div>
 							<input
 								className="w-full h-2 bg-primary/10 rounded-lg appearance-none cursor-pointer accent-primary"
-								max="5"
-								min="0"
-								step="0.5"
+								max={PENALTY_TIME_MAX / 1000}
+								min={PENALTY_TIME_MIN / 1000}
+								step={PENALTY_TIME_STEP / 1000}
 								type="range"
-								value="2.5"
+								value={schulte.penaltyTime / 1000}
+								onChange={(e) =>
+									updateSchulte({
+										penaltyTime:
+											Number(e.target.value) * 1000,
+									})
+								}
 							/>
 							<div className="flex justify-between mt-2 text-xs text-slate-400 font-medium">
-								<span>0秒</span>
-								<span>5秒</span>
+								<span>{PENALTY_TIME_MIN / 1000}s</span>
+								<span>{PENALTY_TIME_MAX / 1000}s</span>
 							</div>
 						</div>
 						<div className="bg-white p-5 rounded-2xl shadow-sm border border-orange-500/5">
@@ -86,18 +113,20 @@ export function Settings() {
 								字体颜色
 							</p>
 							<div className="grid grid-cols-4 gap-2 bg-slate-50 p-1 rounded-xl">
-								<button className="py-2 text-sm font-medium rounded-lg bg-white shadow-sm text-slate-900 border border-slate-100 transition-all">
-									黑色
-								</button>
-								<button className="py-2 text-sm font-medium rounded-lg text-slate-500 hover:text-slate-700 transition-all">
-									3色
-								</button>
-								<button className="py-2 text-sm font-medium rounded-lg text-slate-500 hover:text-slate-700 transition-all">
-									5色
-								</button>
-								<button className="py-2 text-sm font-medium rounded-lg text-slate-500 hover:text-slate-700 transition-all">
-									7色
-								</button>
+								{FONT_COLOR_OPTIONS.map((option) => (
+									<button
+										className={
+											option === schulte.fontColor
+												? "py-2 text-sm font-medium rounded-lg text-slate-900 bg-white shadow-sm ring-1 ring-slate-200 transition-all"
+												: "py-2 text-sm font-medium rounded-lg text-slate-500 hover:text-slate-700 transition-all"
+										}
+										key={option}
+										onClick={() =>
+											updateSchulte({ fontColor: option })
+										}>
+										{option}
+									</button>
+								))}
 							</div>
 						</div>
 						<div className="bg-white p-5 rounded-2xl shadow-sm border border-orange-500/5">
@@ -105,15 +134,22 @@ export function Settings() {
 								边框颜色
 							</p>
 							<div className="grid grid-cols-3 gap-2 bg-slate-50 p-1 rounded-xl">
-								<button className="py-2 text-sm font-medium rounded-lg bg-white shadow-sm text-slate-900 border border-slate-100 transition-all">
-									普通
-								</button>
-								<button className="py-2 text-sm font-medium rounded-lg text-slate-500 hover:text-slate-700 transition-all">
-									3色
-								</button>
-								<button className="py-2 text-sm font-medium rounded-lg text-slate-500 hover:text-slate-700 transition-all">
-									5色
-								</button>
+								{BORDER_COLOR_OPTIONS.map((option) => (
+									<button
+										className={
+											option === schulte.borderColor
+												? "py-2 text-sm font-medium rounded-lg text-slate-900 bg-white shadow-sm ring-1 ring-slate-200 transition-all"
+												: "py-2 text-sm font-medium rounded-lg text-slate-500 hover:text-slate-700 transition-all"
+										}
+										key={option}
+										onClick={() =>
+											updateSchulte({
+												borderColor: option,
+											})
+										}>
+										{option}
+									</button>
+								))}
 							</div>
 						</div>
 					</section>
@@ -131,6 +167,52 @@ export function Settings() {
 								序列记忆设置
 							</h3>
 						</div>
+
+						<div className="bg-white p-6 rounded-2xl shadow-sm border border-orange-500/5 relative overflow-hidden group">
+							<div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+								<span
+									className="material-symbols-outlined text-6xl"
+									data-icon="timer">
+									timer
+								</span>
+							</div>
+							<div className="relative z-10">
+								<div className="flex justify-between items-center mb-6">
+									<div>
+										<p className="font-bold text-slate-900">
+											物品数量
+										</p>
+										<p className="text-sm text-slate-500">
+											单次训练中需要记忆的物品数量
+										</p>
+									</div>
+									<span className="text-2xl font-black text-primary">
+										{sequence.sequenceLength}
+										<small className="text-xs ml-1 font-medium text-slate-400">
+											个
+										</small>
+									</span>
+								</div>
+								<input
+									className="w-full h-2 bg-primary/10 rounded-lg appearance-none cursor-pointer accent-primary"
+									max={15}
+									min={5}
+									step={1}
+									type="range"
+									value={sequence.sequenceLength}
+									onChange={(e) =>
+										updateSequence({
+											sequenceLength: Number(e.target.value),
+										})
+									}
+								/>
+								<div className="flex justify-between mt-3 text-[10px] tracking-wider uppercase text-slate-400 font-bold">
+									<span>5个</span>
+									<span>15个</span>
+								</div>
+							</div>
+						</div>
+
 						<div className="bg-white p-6 rounded-2xl shadow-sm border border-orange-500/5 relative overflow-hidden group">
 							<div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
 								<span
@@ -150,7 +232,7 @@ export function Settings() {
 										</p>
 									</div>
 									<span className="text-2xl font-black text-primary">
-										0.8
+										{(sequence.displayTime / 1000).toFixed(1)}
 										<small className="text-xs ml-1 font-medium text-slate-400">
 											s
 										</small>
@@ -158,11 +240,16 @@ export function Settings() {
 								</div>
 								<input
 									className="w-full h-2 bg-primary/10 rounded-lg appearance-none cursor-pointer accent-primary"
-									max="3.0"
-									min="0.1"
-									step="0.1"
+									max={3.0}
+									min={0.1}
+									step={0.1}
 									type="range"
-									value="0.8"
+									value={sequence.displayTime / 1000}
+									onChange={(e) =>
+										updateSequence({
+											displayTime: Number(e.target.value) * 1000,
+										})
+									}
 								/>
 								<div className="flex justify-between mt-3 text-[10px] tracking-wider uppercase text-slate-400 font-bold">
 									<span>极速模式</span>
@@ -189,7 +276,7 @@ export function Settings() {
 										</p>
 									</div>
 									<span className="text-2xl font-black text-primary">
-										0.4
+										{(sequence.intervalTime / 1000).toFixed(1)}
 										<small className="text-xs ml-1 font-medium text-slate-400">
 											s
 										</small>
@@ -197,11 +284,16 @@ export function Settings() {
 								</div>
 								<input
 									className="w-full h-2 bg-primary/10 rounded-lg appearance-none cursor-pointer accent-primary"
-									max="2.0"
-									min="0.1"
-									step="0.1"
+									max={2.0}
+									min={0.1}
+									step={0.1}
 									type="range"
-									value="0.4"
+									value={sequence.intervalTime / 1000}
+									onChange={(e) =>
+										updateSequence({
+											intervalTime: Number(e.target.value) * 1000,
+										})
+									}
 								/>
 								<div className="flex justify-between mt-3 text-[10px] tracking-wider uppercase text-slate-400 font-bold">
 									<span>瞬时</span>
@@ -234,7 +326,9 @@ export function Settings() {
 				border-t border-orange-500/10
                 ">
 					<div className="max-w-4xl mx-auto">
-						<button className="w-full h-14 bg-primary text-white font-headline font-bold text-lg rounded-2xl amber-glow hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-2">
+						<button
+							onClick={() => navigate(-1)}
+							className="w-full h-14 bg-primary text-white font-headline font-bold text-lg rounded-2xl amber-glow hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-2">
 							<span>保存并返回</span>
 							<span
 								className="material-symbols-outlined"

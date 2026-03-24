@@ -2,7 +2,7 @@
  * @Author: PaulDing 1031071856@qq.com
  * @Date: 2026-03-22 14:43:29
  * @LastEditors: PaulDing 1031071856@qq.com
- * @LastEditTime: 2026-03-22 20:40:47
+ * @LastEditTime: 2026-03-24 10:11:25
  * @FilePath: /tuina_of_brain/frontend/src/types/Schulte.ts
  * @Description:
  *
