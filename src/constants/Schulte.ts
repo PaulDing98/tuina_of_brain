@@ -2,7 +2,7 @@
  * @Author: PaulDing 1031071856@qq.com
  * @Date: 2026-03-22 14:45:58
  * @LastEditors: PaulDing 1031071856@qq.com
- * @LastEditTime: 2026-03-22 19:25:10
+ * @LastEditTime: 2026-03-24 10:22:43
  * @FilePath: /tuina_of_brain/frontend/src/constants/Schulte.ts
  * @Description:
  *
@@ -15,6 +15,7 @@ const INITIAL_STATE: SchulteState = Object.freeze({
 	gameState: { status: "idle" } as const,
 	elapsedTime: 0,
 	wrongClicks: 0,
+	penalty: 0,
 });
 // as const
 export { INITIAL_STATE };
