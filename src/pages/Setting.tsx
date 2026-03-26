@@ -2,7 +2,7 @@
  * @Author: PaulDing 1031071856@qq.com
  * @Date: 2026-03-22 20:23:03
  * @LastEditors: PaulDing 1031071856@qq.com
- * @LastEditTime: 2026-03-24 18:58:28
+ * @LastEditTime: 2026-03-25 19:34:49
  * @FilePath: /tuina_of_brain/frontend/src/pages/Setting.tsx
  * @Description:
  *
@@ -22,7 +22,10 @@ import {
 } from "../constants/Settings";
 export function Settings() {
 	const navigate = useNavigate();
-	const { schulte, sequence, updateSchulte, updateSequence } = useSettingStore();
+	const { schulte, sequence, updateSchulte, updateSequence } =
+		useSettingStore();
+	console.log(schulte, sequence, "tests");
+
 	return (
 		<div className="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
 			<main className="max-w-4xl mx-auto px-6 py-8">
@@ -202,7 +205,9 @@ export function Settings() {
 									value={sequence.sequenceLength}
 									onChange={(e) =>
 										updateSequence({
-											sequenceLength: Number(e.target.value),
+											sequenceLength: Number(
+												e.target.value,
+											),
 										})
 									}
 								/>
@@ -232,7 +237,9 @@ export function Settings() {
 										</p>
 									</div>
 									<span className="text-2xl font-black text-primary">
-										{(sequence.displayTime / 1000).toFixed(1)}
+										{(sequence.displayTime / 1000).toFixed(
+											1,
+										)}
 										<small className="text-xs ml-1 font-medium text-slate-400">
 											s
 										</small>
@@ -247,7 +254,8 @@ export function Settings() {
 									value={sequence.displayTime / 1000}
 									onChange={(e) =>
 										updateSequence({
-											displayTime: Number(e.target.value) * 1000,
+											displayTime:
+												Number(e.target.value) * 1000,
 										})
 									}
 								/>
@@ -276,7 +284,9 @@ export function Settings() {
 										</p>
 									</div>
 									<span className="text-2xl font-black text-primary">
-										{(sequence.intervalTime / 1000).toFixed(1)}
+										{(sequence.intervalTime / 1000).toFixed(
+											1,
+										)}
 										<small className="text-xs ml-1 font-medium text-slate-400">
 											s
 										</small>
@@ -291,7 +301,8 @@ export function Settings() {
 									value={sequence.intervalTime / 1000}
 									onChange={(e) =>
 										updateSequence({
-											intervalTime: Number(e.target.value) * 1000,
+											intervalTime:
+												Number(e.target.value) * 1000,
 										})
 									}
 								/>

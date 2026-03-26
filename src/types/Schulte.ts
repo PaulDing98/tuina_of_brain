@@ -8,7 +8,7 @@
  *
  * Copyright (c) 2026 by ${git_name_email}, All Rights Reserved.
  */
-type GameState =
+export type GameState =
 	| { status: "idle" }
 	| { status: "playing"; startTime: number }
 	| { status: "completed"; endTime: number };

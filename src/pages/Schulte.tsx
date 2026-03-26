@@ -2,7 +2,7 @@
  * @Author: PaulDing 1031071856@qq.com
  * @Date: 2026-03-18 23:13:45
  * @LastEditors: PaulDing 1031071856@qq.com
- * @LastEditTime: 2026-03-23 17:07:56
+ * @LastEditTime: 2026-03-26 11:10:43
  * @FilePath: /tuina_of_brain/frontend/src/pages/Schulte.tsx
  * @Description:
  *
@@ -12,29 +12,25 @@
 // import { use } from "react";
 import { StatsCard } from "../components/StatsCard";
 import { useSchulte } from "../hooks/useSchulte";
+import { useSettingStore } from "../store/useSettingStore";
+import { TimerRef } from "../hooks/TimerRef";
+
 // TODO: 逻辑实现
 // 参考 stitch 文件夹中的 code.html
 
 export function Schulte() {
+	const { schulte } = useSettingStore();
 	const {
 		numbers,
 		currentTarget,
-		gameState,
-		elapsedTime,
 		displayTime,
-		wrongClicks,
 		startGame,
 		clickNumber,
-		reset,
+		gameState,
+		penalty,
 	} = useSchulte();
-	// console.log(numbers);
-	const formatTime = (seconds: number) => {
-		const mins = Math.floor(seconds / 60)
-			.toString()
-			.padStart(2, "0");
-		const secs = (seconds % 60).toString().padStart(2, "0");
-		return `${mins}:${secs}`;
-	};
+	const startTime = gameState.status === "playing" ? gameState.startTime : 0;
+	const endTime = gameState.status === "completed" ? gameState.endTime : 0;
 	return (
 		<div className="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
 			<main className="flex flex-1 justify-center py-8 px-4 lg:px-40">
@@ -44,7 +40,12 @@ export function Schulte() {
 						<StatsCard
 							icon="timer"
 							label="计时器"
-							value={formatTime(displayTime)}
+							value={TimerRef(
+								startTime,
+								penalty,
+								gameState,
+								endTime,
+							)}
 							variant="primary"
 						/>
 						<StatsCard
@@ -68,15 +69,30 @@ export function Schulte() {
 					{/* TODO: 5x5 网格 */}
 					<div className="bg-white dark:bg-slate-800/50 p-4 rounded-2xl shadow-xl border border-primary/10">
 						<div className="grid grid-cols-5 gap-2 sm:gap-3 aspect-square">
-							{/* TODO: 生成 25 个格子 */}
+							{/* 原先的className */}
+							{/* "flex flex-1 aspect-square rounded-lg border-2 items-center justify-center border-primary/5 bg-background-light dark:bg-slate-700 cursor-pointer hover:border-primary hover:scale-[0.98] active:bg-primary active:text-white transition-all duration-150 shadow-sm group" */}
+							{/* 相同的className */}
+							{/* flex flex-1 aspect-square rounded-lg border-2 items-center justify-center */}
+							{/* 高亮的className */}
+							{/* cursor-default bg-primary/10 border-primary */}
+							{/* 非高亮的className */}
+							{/* border-primary/5 bg-background-light dark:bg-slate-700 cursor-pointer hover:border-primary hover:scale-[0.98] active:bg-primary active:text-white transition-all duration-150 shadow-sm group */}
 							{numbers.map((num) => (
 								<div
 									key={num}
 									onClick={() => clickNumber(num)}
-									className="
-                  flex flex-1 aspect-square rounded-lg border-2 border-primary/5 bg-background-light dark:bg-slate-700 items-center justify-center cursor-pointer hover:border-primary hover:scale-[0.98] active:bg-primary active:text-white transition-all duration-150 shadow-sm group">
+									className={`
+        flex flex-1 aspect-square rounded-lg border-2 items-center justify-center 
+        transition-all duration-150 shadow-sm
+        ${
+			schulte.highlightOnCorrect && num < currentTarget
+				? "border-primary bg-primary/10 cursor-default"
+				: "border-primary/5 bg-background-light dark:bg-slate-700 cursor-pointer hover:border-primary hover:scale-[0.98] active:bg-primary active:text-white group"
+		}
+      `}>
+									{/* className="flex flex-1 aspect-square rounded-lg border-2 items-center justify-center border-primary/5 bg-background-light dark:bg-slate-700 cursor-pointer hover:border-primary hover:scale-[0.98] active:bg-primary active:text-white transition-all duration-150 shadow-sm group" */}
 									<span
-										className="text-slate-900 dark:text-slate-100
+										className="flex text-slate-900 dark:text-slate-100
 									group-active:text-white text-xl sm:text-2xl
 									font-bold">
 										{num}

@@ -1,7 +1,8 @@
+import type { ReactNode } from "react";
 interface StatsCardProps {
 	icon: string;
 	label: string;
-	value: string;
+	value: ReactNode;
 	unit?: string;
 	variant?: "primary" | "default";
 }
@@ -14,7 +15,6 @@ export function StatsCard({
 	variant = "default",
 }: StatsCardProps) {
 	const isPrimary = variant === "primary";
-
 	return (
 		<div
 			className={`flex min-w-[140px] flex-1 flex-col gap-1 rounded-xl p-4 border shadow-sm ${
