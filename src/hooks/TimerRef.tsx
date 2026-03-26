@@ -2,7 +2,7 @@
  * @Author: PaulDing 1031071856@qq.com
  * @Date: 2026-03-25 21:16:59
  * @LastEditors: PaulDing 1031071856@qq.com
- * @LastEditTime: 2026-03-26 11:16:04
+ * @LastEditTime: 2026-03-26 11:49:23
  * @FilePath: /tuina_of_brain/frontend/src/hooks/TimerRef.tsx
  * @Description:
  *
@@ -30,7 +30,7 @@ export function TimerRef(
 ) {
 	const timeRef = useRef<HTMLSpanElement>(null);
 	const initialStartTimeRef = useRef<number>(0); // 只在初始渲染时设置一次，后续不变
-	console.log(startTime, penalty, gameState, "TimerRef");
+	// console.log(startTime, penalty, gameState, "TimerRef");
 	useEffect(() => {
 		if (
 			gameState.status === "playing" &&
@@ -43,8 +43,6 @@ export function TimerRef(
 	}, [gameState.status, startTime]);
 
 	useEffect(() => {
-		console.log("4");
-
 		if (!timeRef.current) return;
 
 		if (gameState.status === "completed") {
@@ -68,7 +66,7 @@ export function TimerRef(
 			}, 50);
 			return () => clearInterval(interval);
 		}
-	}, [penalty, gameState.status]);
+	}, [startTime, endTime, penalty, gameState.status]);
 
 	return <span ref={timeRef}>00:00</span>;
 }
