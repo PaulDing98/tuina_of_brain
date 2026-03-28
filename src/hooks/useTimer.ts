@@ -1,15 +1,5 @@
-/*
- * @Author: PaulDing 1031071856@qq.com
- * @Date: 2026-03-25 21:16:59
- * @LastEditors: PaulDing 1031071856@qq.com
- * @LastEditTime: 2026-03-26 11:49:23
- * @FilePath: /tuina_of_brain/frontend/src/hooks/TimerRef.tsx
- * @Description:
- *
- * Copyright (c) 2026 by ${git_name_email}, All Rights Reserved.
- */
 import { useRef, useEffect } from "react";
-import type { GameState } from "../types/Schulte";
+import type { TimerRefProps } from "../types/Timer";
 // 秒:毫秒
 const formatTime = (milliseconds: number) => {
 	// 计算总秒数（向下取整）
@@ -22,15 +12,15 @@ const formatTime = (milliseconds: number) => {
 		.padStart(2, "0");
 	return `${secs}:${ms}`;
 };
-export function TimerRef(
-	startTime: number,
-	penalty: number,
-	gameState: GameState,
-	endTime: number,
-) {
+
+export function useTimer({
+	startTime,
+	penalty,
+	gameState,
+	endTime,
+}: TimerRefProps) {
 	const timeRef = useRef<HTMLSpanElement>(null);
 	const initialStartTimeRef = useRef<number>(0); // 只在初始渲染时设置一次，后续不变
-	// console.log(startTime, penalty, gameState, "TimerRef");
 	useEffect(() => {
 		if (
 			gameState.status === "playing" &&
@@ -67,6 +57,5 @@ export function TimerRef(
 			return () => clearInterval(interval);
 		}
 	}, [startTime, endTime, penalty, gameState.status]);
-
-	return <span ref={timeRef}>00:00</span>;
+	return { timeRef };
 }

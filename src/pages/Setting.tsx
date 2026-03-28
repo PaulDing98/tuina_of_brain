@@ -2,7 +2,7 @@
  * @Author: PaulDing 1031071856@qq.com
  * @Date: 2026-03-22 20:23:03
  * @LastEditors: PaulDing 1031071856@qq.com
- * @LastEditTime: 2026-03-25 19:34:49
+ * @LastEditTime: 2026-03-26 16:12:16
  * @FilePath: /tuina_of_brain/frontend/src/pages/Setting.tsx
  * @Description:
  *
@@ -42,6 +42,7 @@ export function Settings() {
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 					{/* Schulte Table Settings */}
 					<section className="space-y-6">
+						{/* placeholder */}
 						<div className="flex items-center gap-3 mb-2">
 							<div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
 								<span
@@ -54,6 +55,7 @@ export function Settings() {
 								舒尔特表设置
 							</h3>
 						</div>
+						{/* Highlight on Correct */}
 						<div className="bg-white p-5 rounded-2xl shadow-sm border border-orange-500/5 flex items-center justify-between">
 							<div>
 								<p className="font-bold text-slate-900">
@@ -83,6 +85,7 @@ export function Settings() {
 								<div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
 							</label>
 						</div>
+						{/* Penalty Time */}
 						<div className="bg-white p-5 rounded-2xl shadow-sm border border-orange-500/5">
 							<div className="flex justify-between items-center mb-4">
 								<p className="font-bold text-slate-900">
@@ -111,6 +114,7 @@ export function Settings() {
 								<span>{PENALTY_TIME_MAX / 1000}s</span>
 							</div>
 						</div>
+						{/* Font Color */}
 						<div className="bg-white p-5 rounded-2xl shadow-sm border border-orange-500/5">
 							<p className="font-bold text-slate-900 mb-4">
 								字体颜色
@@ -119,19 +123,21 @@ export function Settings() {
 								{FONT_COLOR_OPTIONS.map((option) => (
 									<button
 										className={
-											option === schulte.fontColor
+											option.value ===
+											schulte.fontColor.value
 												? "py-2 text-sm font-medium rounded-lg text-slate-900 bg-white shadow-sm ring-1 ring-slate-200 transition-all"
 												: "py-2 text-sm font-medium rounded-lg text-slate-500 hover:text-slate-700 transition-all"
 										}
-										key={option}
+										key={option.value}
 										onClick={() =>
 											updateSchulte({ fontColor: option })
 										}>
-										{option}
+										{option.label}
 									</button>
 								))}
 							</div>
 						</div>
+						{/* Border Color */}
 						<div className="bg-white p-5 rounded-2xl shadow-sm border border-orange-500/5">
 							<p className="font-bold text-slate-900 mb-4">
 								边框颜色
@@ -140,17 +146,18 @@ export function Settings() {
 								{BORDER_COLOR_OPTIONS.map((option) => (
 									<button
 										className={
-											option === schulte.borderColor
+											option.value ===
+											schulte.borderColor.value
 												? "py-2 text-sm font-medium rounded-lg text-slate-900 bg-white shadow-sm ring-1 ring-slate-200 transition-all"
 												: "py-2 text-sm font-medium rounded-lg text-slate-500 hover:text-slate-700 transition-all"
 										}
-										key={option}
+										key={option.value}
 										onClick={() =>
 											updateSchulte({
 												borderColor: option,
 											})
 										}>
-										{option}
+										{option.label}
 									</button>
 								))}
 							</div>

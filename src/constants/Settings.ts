@@ -1,3 +1,13 @@
+/*
+ * @Author: PaulDing 1031071856@qq.com
+ * @Date: 2026-03-24 10:23:49
+ * @LastEditors: PaulDing 1031071856@qq.com
+ * @LastEditTime: 2026-03-26 16:05:25
+ * @FilePath: /tuina_of_brain/frontend/src/constants/Settings.ts
+ * @Description:
+ *
+ * Copyright (c) 2026 by ${git_name_email}, All Rights Reserved.
+ */
 // constants/Settings.ts
 import type { SettingsWrapper } from "../types/Settings";
 
@@ -5,8 +15,8 @@ import type { SettingsWrapper } from "../types/Settings";
 export const DEFAULT_SETTINGS = Object.freeze({
 	schulte: {
 		highlightOnCorrect: true,
-		borderColor: "default",
-		fontColor: "default",
+		borderColor: { value: 0, label: "默认" },
+		fontColor: { value: 0, label: "默认" },
 		penaltyTime: 2500,
 	},
 	sequence: {
@@ -18,13 +28,18 @@ export const DEFAULT_SETTINGS = Object.freeze({
 
 // 设置选项常量
 export const FONT_COLOR_OPTIONS = [
-	"default",
-	"color3",
-	"color5",
-	"color7",
+	{ value: 0, label: "默认" },
+	{ value: 3, label: "三色" },
+	{ value: 5, label: "五色" },
+	{ value: 7, label: "七色" },
 ] as const;
 
-export const BORDER_COLOR_OPTIONS = ["default", "color3", "color5"] as const;
+export const BORDER_COLOR_OPTIONS = [
+	{ value: 0, label: "默认" },
+	{ value: 3, label: "三色" },
+	{ value: 5, label: "五色" },
+	{ value: 7, label: "七色" },
+] as const;
 
 export const PENALTY_TIME_MIN = 0;
 export const PENALTY_TIME_MAX = 5000;

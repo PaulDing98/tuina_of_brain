@@ -8,7 +8,7 @@
  *
  * Copyright (c) 2026 by ${git_name_email}, All Rights Reserved.
  */
-const fisherYates = (arr: number[]) => {
+const fisherYates = (arr: any[]) => {
 	const result = [...arr];
 	for (let i = result.length - 1; i > 0; i--) {
 		const j = Math.floor(Math.random() * (i + 1));

@@ -1,8 +1,16 @@
 // types/Settings.ts
 export interface SchulteSettings {
 	highlightOnCorrect: boolean; // 点击正确后是否继续高亮
-	borderColor: "default" | "color3" | "color5"; // 边框颜色模式
-	fontColor: "default" | "color3" | "color5" | "color7"; // 字体颜色模式
+	borderColor:
+		| { value: 0; label: "默认" }
+		| { value: 3; label: "三色" }
+		| { value: 5; label: "五色" }
+		| { value: 7; label: "七色" }; // 边框颜色模式
+	fontColor:
+		| { value: 0; label: "默认" }
+		| { value: 3; label: "三色" }
+		| { value: 5; label: "五色" }
+		| { value: 7; label: "七色" }; // 字体颜色模式
 	penaltyTime: number; // 惩罚时间（毫秒）
 }
 export interface SequenceSettings {

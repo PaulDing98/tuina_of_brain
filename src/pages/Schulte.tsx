@@ -2,7 +2,7 @@
  * @Author: PaulDing 1031071856@qq.com
  * @Date: 2026-03-18 23:13:45
  * @LastEditors: PaulDing 1031071856@qq.com
- * @LastEditTime: 2026-03-26 11:10:43
+ * @LastEditTime: 2026-03-26 18:31:46
  * @FilePath: /tuina_of_brain/frontend/src/pages/Schulte.tsx
  * @Description:
  *
@@ -11,26 +11,30 @@
 // import { Header } from "../components/Header";
 // import { use } from "react";
 import { StatsCard } from "../components/StatsCard";
+import { Timer } from "../components/Timer";
+import { useColor } from "../hooks/useColor";
 import { useSchulte } from "../hooks/useSchulte";
 import { useSettingStore } from "../store/useSettingStore";
-import { TimerRef } from "../hooks/TimerRef";
-
 // TODO: 逻辑实现
 // 参考 stitch 文件夹中的 code.html
 
 export function Schulte() {
+	// 读取设置并返回className
 	const { schulte } = useSettingStore();
 	const {
 		numbers,
 		currentTarget,
-		displayTime,
 		startGame,
 		clickNumber,
-		gameState,
 		penalty,
+		gameState,
 	} = useSchulte();
 	const startTime = gameState.status === "playing" ? gameState.startTime : 0;
 	const endTime = gameState.status === "completed" ? gameState.endTime : 0;
+	const { colorList } = useColor(gameState);
+	console.log("test", colorList);
+	// console.log("test");
+
 	return (
 		<div className="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
 			<main className="flex flex-1 justify-center py-8 px-4 lg:px-40">
@@ -40,12 +44,14 @@ export function Schulte() {
 						<StatsCard
 							icon="timer"
 							label="计时器"
-							value={TimerRef(
-								startTime,
-								penalty,
-								gameState,
-								endTime,
-							)}
+							value={
+								<Timer
+									startTime={startTime}
+									penalty={penalty}
+									gameState={gameState}
+									endTime={endTime}
+								/>
+							}
 							variant="primary"
 						/>
 						<StatsCard
@@ -66,18 +72,10 @@ export function Schulte() {
 							</button>
 						</div>
 					</div>
-					{/* TODO: 5x5 网格 */}
 					<div className="bg-white dark:bg-slate-800/50 p-4 rounded-2xl shadow-xl border border-primary/10">
 						<div className="grid grid-cols-5 gap-2 sm:gap-3 aspect-square">
-							{/* 原先的className */}
-							{/* "flex flex-1 aspect-square rounded-lg border-2 items-center justify-center border-primary/5 bg-background-light dark:bg-slate-700 cursor-pointer hover:border-primary hover:scale-[0.98] active:bg-primary active:text-white transition-all duration-150 shadow-sm group" */}
-							{/* 相同的className */}
-							{/* flex flex-1 aspect-square rounded-lg border-2 items-center justify-center */}
-							{/* 高亮的className */}
-							{/* cursor-default bg-primary/10 border-primary */}
-							{/* 非高亮的className */}
-							{/* border-primary/5 bg-background-light dark:bg-slate-700 cursor-pointer hover:border-primary hover:scale-[0.98] active:bg-primary active:text-white transition-all duration-150 shadow-sm group */}
-							{numbers.map((num) => (
+							{/* text-[${colorList[index]?.fontColor || "inherit"}] border-[${colorList[index]?.borderColor || "inherit"}] */}
+							{numbers.map((num, index) => (
 								<div
 									key={num}
 									onClick={() => clickNumber(num)}
@@ -91,10 +89,11 @@ export function Schulte() {
 		}
       `}>
 									{/* className="flex flex-1 aspect-square rounded-lg border-2 items-center justify-center border-primary/5 bg-background-light dark:bg-slate-700 cursor-pointer hover:border-primary hover:scale-[0.98] active:bg-primary active:text-white transition-all duration-150 shadow-sm group" */}
+									{/* `text-[${colorList[index]?.fontColor || "inherit"}]` */}
 									<span
-										className="flex text-slate-900 dark:text-slate-100
+										className={`${num < currentTarget ? "text-primary" : ""} flex  dark:text-slate-100
 									group-active:text-white text-xl sm:text-2xl
-									font-bold">
+									font-bold`}>
 										{num}
 									</span>
 								</div>
